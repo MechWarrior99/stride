@@ -62,7 +62,7 @@ namespace Stride.Engine.Tests
 
             camera = new TestCamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor);
             CameraComponent = camera.Camera;
-            Script.Add(camera);
+            WorkerSystem.Add(camera);
 
             camera.Position = new Vector3(6.0f, 2.5f, 1.5f);
             camera.SetTarget(knight, true);

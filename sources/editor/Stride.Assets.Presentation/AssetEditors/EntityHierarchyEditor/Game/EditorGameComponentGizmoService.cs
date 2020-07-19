@@ -72,7 +72,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             // update all gizmo of the scene.
             while (!IsDisposed)
             {
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
                 sceneGizmos.ForEach(x => x.Update());
             }
         }
@@ -119,7 +119,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             foreach (var gizmo in sceneGizmos)
                 gizmo.Initialize(editorGame.Services, editorScene);
 
-            editorGame.Script.AddTask(Update);
+            editorGame.WorkerSystem.AddTask(Update);
             return Task.FromResult(true);
         }
 

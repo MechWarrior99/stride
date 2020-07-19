@@ -62,10 +62,10 @@ namespace Stride.Engine
         public GraphicsDeviceManager GraphicsDeviceManager { get; internal set; }
 
         /// <summary>
-        /// Gets the script system.
+        /// Gets the worker system.
         /// </summary>
         /// <value>The script.</value>
-        public ScriptSystem Script { get; }
+        public WorkerSystem WorkerSystem { get; }
 
         /// <summary>
         /// Gets the input manager.
@@ -198,8 +198,8 @@ namespace Stride.Engine
 
             // Create all core services, except Input which is created during `Initialize'.
             // Registration takes place in `Initialize'.
-            Script = new ScriptSystem(Services);
-            Services.AddService(Script);
+            WorkerSystem = new WorkerSystem(Services);
+            Services.AddService(WorkerSystem);
 
             SceneSystem = new SceneSystem(Services);
             Services.AddService(SceneSystem);
@@ -351,7 +351,7 @@ namespace Stride.Engine
             // - Must be after Input, so that scripts are able to get latest input
             // - Must be before Entities/Camera/Audio/UI, so that scripts can apply
             // changes in the same frame they will be applied
-            GameSystems.Add(Script);
+            GameSystems.Add(WorkerSystem);
 
             // Add the Font system
             GameSystems.Add(gameFontSystem);
@@ -455,7 +455,7 @@ namespace Stride.Engine
         internal override void LoadContentInternal()
         {
             base.LoadContentInternal();
-            Script.AddTask(LoadContent);
+            WorkerSystem.AddTask(LoadContent);
         }
         protected virtual LogListener GetLogListener()
         {

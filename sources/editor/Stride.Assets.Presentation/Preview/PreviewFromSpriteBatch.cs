@@ -46,7 +46,7 @@ namespace Stride.Assets.Presentation.Preview
 
             await base.Initialize();
 
-            Game.Script.AddTask(MoveAndScaleSpriteOnUserInput); 
+            Game.WorkerSystem.AddTask(MoveAndScaleSpriteOnUserInput); 
         }
 
         protected virtual Vector2 SpriteSize
@@ -88,7 +88,7 @@ namespace Stride.Assets.Presentation.Preview
 
             while (IsRunning)
             {
-                await Game.Script.NextFrame();
+                await Game.WorkerSystem.NextFrame();
 
                 if (Game.Input.HasPressedMouseButtons)
                     previousMousePosition = Game.Input.MousePosition;

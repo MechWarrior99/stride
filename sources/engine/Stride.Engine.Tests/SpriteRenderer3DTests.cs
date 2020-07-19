@@ -102,7 +102,7 @@ namespace Stride.Engine.Tests
 
             cameraScript = new TestCamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor);
             CameraComponent = cameraScript.Camera;
-            Script.Add(cameraScript);
+            WorkerSystem.Add(cameraScript);
 
             cameraScript.Yaw = 0;
             cameraScript.Pitch = 0;

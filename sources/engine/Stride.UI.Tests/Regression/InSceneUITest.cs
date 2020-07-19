@@ -33,7 +33,7 @@ namespace Stride.UI.Tests.Regression
             // setup the camera
             var camera = new TestUICamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor) { Yaw = 0, Pitch = 0, Position = new Vector3(0, 0, 1000), MoveSpeed = 100 };
             CameraComponent = camera.Camera;
-            Script.Add(camera);
+            WorkerSystem.Add(camera);
 
             UIRoot.Transform.Rotation = Quaternion.RotationX(MathUtil.Pi / 3f);
             UIComponent.Page = new UIPage { RootElement = new ImageElement { Source = (SpriteFromTexture)new Sprite(Content.Load<Texture>("uv")) } };

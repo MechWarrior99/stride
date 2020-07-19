@@ -47,12 +47,12 @@ namespace Stride.Physics.Tests
         public void ColliderShapesTest1()
         {
             var game = new ColliderShapesTest();
-            game.Script.AddTask(async () =>
+            game.WorkerSystem.AddTask(async () =>
             {
                 game.ScreenShotAutomationEnabled = false;
 
-                await game.Script.NextFrame();
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
+                await game.WorkerSystem.NextFrame();
                 var simulation = game.SceneSystem.SceneInstance.RootScene.Entities.First(ent => ent.Name == "Simulation").Get<StaticColliderComponent>().Simulation;
 
                 HitResult hit;
@@ -213,7 +213,7 @@ namespace Stride.Physics.Tests
                 compound1.Transform.UpdateWorldMatrix();
                 compound1.Get<PhysicsComponent>().UpdatePhysicsTransformation();
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 hit = simulation.Raycast((compound1.Transform.Position - Vector3.UnitZ * 2) + new Vector3(0.0f, 1.55f * 2, 0.0f), compound1.Transform.Position + new Vector3(0.0f, 1.55f * 2, 0.0f));
                 Assert.False(hit.Succeeded);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Stride contributors (https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Copyright (c) Stride contributors (https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
 // Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
 
 using System;
@@ -119,7 +119,7 @@ namespace Stride.Debugger
             // Serialize with Yaml layer
             var parsingEvents = new List<ParsingEvent>();
             // We also want to serialize live component variables
-            var serializerContextSettings = new SerializerContextSettings { MemberMask = DataMemberAttribute.DefaultMask | ScriptComponent.LiveScriptingMask };
+            var serializerContextSettings = new SerializerContextSettings { MemberMask = DataMemberAttribute.DefaultMask | WorkerComponent.LiveScriptingMask };
             AssetYamlSerializer.Default.Serialize(new ParsingEventListEmitter(parsingEvents), components, typeof(EntityComponentCollection), serializerContextSettings);
             return parsingEvents;
         }
@@ -133,9 +133,9 @@ namespace Stride.Debugger
             var oldComponent = reloadedComponent.Entity.Components[reloadedComponent.ComponentIndex];
 
             // Flag scripts as being live reloaded
-            if (game != null && oldComponent is ScriptComponent)
+            if (game != null && oldComponent is WorkerComponent)
             {
-                game.Script.LiveReload((ScriptComponent)oldComponent, (ScriptComponent)newComponent);
+                game.WorkerSystem.LiveReload((WorkerComponent)oldComponent, (WorkerComponent)newComponent);
             }
 
             // Replace with new component
@@ -143,7 +143,8 @@ namespace Stride.Debugger
             reloadedComponent.Entity.Components[reloadedComponent.ComponentIndex] = newComponent;
 
             // TODO: Dispose or Cancel on script?
-            (oldComponent as ScriptComponent)?.Cancel();
+            if (oldComponent is ICancel cancel)
+                cancel.Cancel();
         }
 
         private class ReloadedComponentEntryLive

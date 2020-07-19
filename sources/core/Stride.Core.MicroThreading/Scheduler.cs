@@ -307,9 +307,14 @@ namespace Stride.Core.MicroThreading
             return schedulerEntryNode;
         }
 
-        internal PriorityQueueNode<SchedulerEntry> Create(Action simpleAction, long priority)
+        internal PriorityQueueNode<SchedulerEntry> Create(Action simpleAction, int priority, object token = null, ProfilingKey profilingKey = null)
         {
-            return new PriorityQueueNode<SchedulerEntry>(new SchedulerEntry(simpleAction, priority));
+            return new PriorityQueueNode<SchedulerEntry>(new SchedulerEntry(simpleAction, priority) { Token = token, ProfilingKey = profilingKey });
+        }
+
+        internal PriorityQueueNode<SchedulerEntry> Create(Action simpleAction, long priority, object token = null, ProfilingKey profilingKey = null)
+        {
+            return new PriorityQueueNode<SchedulerEntry>(new SchedulerEntry(simpleAction, priority) { Token = token, ProfilingKey = profilingKey });
         }
 
         internal void Schedule(PriorityQueueNode<SchedulerEntry> schedulerEntry, ScheduleMode scheduleMode)

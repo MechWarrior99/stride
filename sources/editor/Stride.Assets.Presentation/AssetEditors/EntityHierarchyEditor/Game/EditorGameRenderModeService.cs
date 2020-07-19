@@ -41,7 +41,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
         protected override Task<bool> Initialize(EditorServiceGame editorGame)
         {
             game = (EntityHierarchyEditorGame)editorGame;
-            game.Script.AddTask(Update);
+            game.WorkerSystem.AddTask(Update);
 
             return Task.FromResult(true);
         }
@@ -71,7 +71,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
         {
             while (!IsDisposed)
             {
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 if (!IsActive)
                     continue;

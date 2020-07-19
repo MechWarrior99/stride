@@ -47,12 +47,12 @@ namespace Stride.Physics.Tests
         public void CharacterTest1()
         {
             var game = new CharacterTest();
-            game.Script.AddTask(async () =>
+            game.WorkerSystem.AddTask(async () =>
             {
                 game.ScreenShotAutomationEnabled = false;
 
-                await game.Script.NextFrame();
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 var character = game.SceneSystem.SceneInstance.RootScene.Entities.First(ent => ent.Name == "Character");
                 var controller = character.Get<CharacterComponent>();
@@ -62,14 +62,14 @@ namespace Stride.Physics.Tests
                 var twoSeconds = 120;
                 while (twoSeconds-- > 0)
                 {
-                    await game.Script.NextFrame();
+                    await game.WorkerSystem.NextFrame();
                 }
 
                 Assert.True(controller.IsGrounded);
 
                 controller.Jump();
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 Assert.False(controller.IsGrounded);
 
@@ -77,7 +77,7 @@ namespace Stride.Physics.Tests
                 twoSeconds = 120;
                 while (twoSeconds-- > 0)
                 {
-                    await game.Script.NextFrame();
+                    await game.WorkerSystem.NextFrame();
                 }
 
                 Assert.True(controller.IsGrounded);
@@ -86,7 +86,7 @@ namespace Stride.Physics.Tests
 
                 controller.SetVelocity(Vector3.UnitX * 3);
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 Assert.NotEqual(currentPos, character.Transform.Position);
                 var target = currentPos + Vector3.UnitX*3*simulation.FixedTimeStep;
@@ -96,7 +96,7 @@ namespace Stride.Physics.Tests
 
                 currentPos = character.Transform.Position;
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 Assert.NotEqual(currentPos, character.Transform.Position);
                 target = currentPos + Vector3.UnitX * 3 * simulation.FixedTimeStep;
@@ -106,23 +106,23 @@ namespace Stride.Physics.Tests
 
                 controller.SetVelocity(Vector3.Zero);
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 currentPos = character.Transform.Position;
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 Assert.Equal(currentPos, character.Transform.Position);
 
                 var collider = game.SceneSystem.SceneInstance.RootScene.Entities.First(ent => ent.Name == "Collider").Get<StaticColliderComponent>();
                 collider.ProcessCollisions = true;
 
-                game.Script.AddTask(async () =>
+                game.WorkerSystem.AddTask(async () =>
                 {
                     var fourSeconds = 240;
                     while (fourSeconds-- > 0)
                     {
-                        await game.Script.NextFrame();
+                        await game.WorkerSystem.NextFrame();
                     }
                     Assert.True(false, "Character controller never collided with test collider.");
                 });

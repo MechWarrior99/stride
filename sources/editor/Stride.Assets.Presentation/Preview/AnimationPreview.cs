@@ -33,7 +33,7 @@ namespace Stride.Assets.Presentation.Preview
         {
             await base.Initialize();
 
-            Game.Script.AddTask(UpdateAnimationTime);
+            Game.WorkerSystem.AddTask(UpdateAnimationTime);
         }
 
         protected override void PrepareLoadedEntity()
@@ -64,8 +64,8 @@ namespace Stride.Assets.Presentation.Preview
             while (IsRunning)
             {
                 // Await two frames to reduce overhead
-                await Game.Script.NextFrame();
-                await Game.Script.NextFrame();
+                await Game.WorkerSystem.NextFrame();
+                await Game.WorkerSystem.NextFrame();
                 if (UpdateViewModelTime != null)
                 {
                     if (playingAnim != null)

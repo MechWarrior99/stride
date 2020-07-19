@@ -245,7 +245,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
             Reset();
 
             // create the script
-            Game.Script.AddTask(Update);
+            Game.WorkerSystem.AddTask(Update);
 
             return Task.FromResult(true);
         }
@@ -317,7 +317,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
                     UpdateViewMatrix();
                 }
 
-                await Game.Script.NextFrame();
+                await Game.WorkerSystem.NextFrame();
             }
         }
 

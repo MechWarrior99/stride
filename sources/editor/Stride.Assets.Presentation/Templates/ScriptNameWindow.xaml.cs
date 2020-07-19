@@ -30,11 +30,11 @@ namespace Stride.Assets.Presentation.Templates
         static ScriptNameWindow()
         {
             // Reserve the name of the base classes and interfaces
-            ReservedNames.Add(nameof(AsyncScript));
-            ReservedNames.Add(nameof(SyncScript));
-            ReservedNames.Add(nameof(StartupScript));
-            typeof(ScriptComponent).GetInterfaces().ForEach(x => ReservedNames.Add(x.Name));
-            var type = typeof(ScriptComponent);
+            ReservedNames.Add(nameof(AsyncWorker));
+            ReservedNames.Add(nameof(WorkerComponent));
+            ReservedNames.Add(nameof(WorkerComponent));
+            typeof(WorkerComponent).GetInterfaces().ForEach(x => ReservedNames.Add(x.Name));
+            var type = typeof(WorkerComponent);
             while (type != typeof(object) && type != null)
             {
                 ReservedNames.Add(type.Name);

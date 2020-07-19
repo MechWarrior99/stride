@@ -986,7 +986,7 @@
     </DrawingImage.Drawing>
   </DrawingImage>
 
-  <DrawingImage x:Key="{x:Type engine:ScriptComponent}" >
+  <DrawingImage x:Key="{x:Type engine:WorkerComponent}" >
     <DrawingImage.Drawing>
       <DrawingGroup>
         <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />

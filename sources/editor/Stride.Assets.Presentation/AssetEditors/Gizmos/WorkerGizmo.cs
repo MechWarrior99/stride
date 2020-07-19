@@ -4,11 +4,11 @@ using Stride.Engine;
 
 namespace Stride.Assets.Presentation.AssetEditors.Gizmos
 {
-    [GizmoComponent(typeof(ScriptComponent), true)]
-    public class ScriptGizmo : BillboardingGizmo<ScriptComponent>
+    [GizmoComponent(typeof(WorkerComponent), true)]
+    public class WorkerGizmo : BillboardingGizmo<WorkerComponent>
     {
-        public ScriptGizmo(EntityComponent component)
-            : base(component, "Script", GizmoResources.ScriptGizmo)
+        public WorkerGizmo(EntityComponent component)
+            : base(component, "Worker", GizmoResources.ScriptGizmo)
         {
         }
     }

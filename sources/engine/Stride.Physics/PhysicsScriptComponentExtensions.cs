@@ -6,18 +6,18 @@ using Stride.Engine;
 namespace Stride.Physics
 {
     /// <summary>
-    /// Extension methods for the <see cref="ScriptComponent"/> related to phystics
+    /// Extension methods for the <see cref="WorkerComponent"/> related to phystics
     /// </summary>
-    public static class PhysicsScriptComponentExtensions
+    public static class PhysicsWorkerComponentExtensions
     {
         /// <summary>
         /// Gets the curent <see cref="Simulation"/>.
         /// </summary>
-        /// <param name="scriptComponent">The script component to query physics from</param>
+        /// <param name="workerComponent">The worker component to query physics from</param>
         /// <returns>The simulation object or null if there are no simulation running for the current scene.</returns>
-        public static Simulation GetSimulation(this ScriptComponent scriptComponent)
+        public static Simulation GetSimulation(this WorkerComponent workerComponent)
         {
-            return scriptComponent.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
+            return workerComponent.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
         }
     }
 }

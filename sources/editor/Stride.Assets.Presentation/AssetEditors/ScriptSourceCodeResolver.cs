@@ -77,7 +77,7 @@ namespace Stride.Assets.Presentation.AssetEditors
 
             var assemblyFullName = gameProjectCompilation.Assembly.Identity.GetDisplayName();
 
-            var strideScriptType = gameProjectCompilation.GetTypeByMetadataName(typeof(ScriptComponent).FullName);
+            var strideScriptType = gameProjectCompilation.GetTypeByMetadataName(typeof(WorkerComponent).FullName);
 
             var symbols = gameProjectCompilation.GetSymbolsWithName(x => true, SymbolFilter.Type).Cast<ITypeSymbol>().ToList();
             if (!symbols.Any())

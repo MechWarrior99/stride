@@ -77,7 +77,7 @@ namespace Stride.Input.Tests
             Input.Gestures.Add(new GestureConfigTap());
 
             // add a task to the task scheduler that will be executed asynchronously 
-            Script.AddTask(UpdateInputStates);
+            WorkerSystem.AddTask(UpdateInputStates);
 
             // Create a new VirtualButtonConfigSet if none exists. 
             Input.VirtualButtonConfigSet = Input.VirtualButtonConfigSet ?? new VirtualButtonConfigSet();
@@ -175,7 +175,7 @@ namespace Stride.Input.Tests
         {
             while (true)
             {
-                await Script.NextFrame();
+                await WorkerSystem.NextFrame();
 
                 var currentTime = DrawTime.Total;
 

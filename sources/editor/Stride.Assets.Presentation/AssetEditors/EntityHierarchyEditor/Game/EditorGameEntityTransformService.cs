@@ -203,7 +203,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             ActiveTransformationGizmo = TranslationGizmo;
 
             // Start update script (with priority 1 so that it happens after UpdateModifiedEntitiesList is called -- which usually happens from a EditorGameComtroller.PostAction() which has a default priority 0)
-            game.Script.AddTask(Update, 1);
+            game.WorkerSystem.AddTask(Update, 1);
             return Task.FromResult(true);
         }
 
@@ -250,7 +250,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
                     await Task.WhenAll(tasks);
                 }
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
             }
         }
 

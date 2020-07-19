@@ -237,7 +237,7 @@ namespace Stride.Graphics.Regression
             Window.Position = Int2.Zero; // avoid possible side effects due to position of the window in the screen.
 #endif
 
-            Script.AddTask(RegisterTestsInternal);
+            WorkerSystem.AddTask(RegisterTestsInternal);
         }
 
         protected override void Destroy()

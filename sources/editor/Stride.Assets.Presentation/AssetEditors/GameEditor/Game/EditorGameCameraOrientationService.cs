@@ -29,7 +29,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
             gizmo = new CameraOrientationGizmo(this, game);
             gizmo.Initialize(game.Services, game.EditorScene);
 
-            game.Script.AddTask(Update);
+            game.WorkerSystem.AddTask(Update);
             return Task.FromResult(true);
         }
 
@@ -77,7 +77,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
                     }
                 }
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Stride contributors (https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Copyright (c) Stride contributors (https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
 // Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
 
 using System;
@@ -420,17 +420,17 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Services
 
         partial void UnregisterFromDragDropEvents();
 
-        private Task PostTask(Func<ScriptSystem, Task> task, int priority)
+        private Task PostTask(Func<WorkerSystem, Task> task, int priority)
         {
             var tcs = new TaskCompletionSource<int>();
-            Game.Script.AddTask(async () => { await task(Game.Script); tcs.SetResult(0); }, priority);
+            Game.WorkerSystem.AddTask(async () => { await task(Game.WorkerSystem); tcs.SetResult(0); }, priority);
             return tcs.Task;
         }
 
-        private Task<T> PostTask<T>(Func<ScriptSystem, Task<T>> task, int priority)
+        private Task<T> PostTask<T>(Func<WorkerSystem, Task<T>> task, int priority)
         {
             var tcs = new TaskCompletionSource<T>();
-            Game.Script.AddTask(async () => { var result = await task(Game.Script); tcs.SetResult(result); }, priority);
+            Game.WorkerSystem.AddTask(async () => { var result = await task(Game.WorkerSystem); tcs.SetResult(result); }, priority);
             return tcs.Task;
         }
 
@@ -443,7 +443,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Services
             }
 
             var tcs = new TaskCompletionSource<int>();
-            Game.Script.AddTask(() => { action(); tcs.SetResult(0); return tcs.Task; }, priority);
+            Game.WorkerSystem.AddTask(() => { action(); tcs.SetResult(0); return tcs.Task; }, priority);
             return tcs.Task;
         }
 
@@ -456,7 +456,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Services
             }
 
             var tcs = new TaskCompletionSource<T>();
-            Game.Script.AddTask(() => { var result = action(); tcs.SetResult(result); return tcs.Task; }, priority);
+            Game.WorkerSystem.AddTask(() => { var result = action(); tcs.SetResult(result); return tcs.Task; }, priority);
             return tcs.Task;
         }
     }

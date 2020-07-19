@@ -9,15 +9,15 @@ using Stride.Core.MicroThreading;
 namespace Stride.Engine
 {
     /// <summary>
-    /// A script which can be implemented as an async microthread.
+    /// A component which can be implemented as an async microthread.
     /// </summary>
-    public abstract class AsyncScript : ScriptComponent
+    public abstract class AsyncWorker : WorkerComponent
     {
         [DataMemberIgnore]
-        internal MicroThread MicroThread;
+        internal MicroThread MicroThread { get; set; }
 
         [DataMemberIgnore]
-        internal CancellationTokenSource CancellationTokenSource;
+        internal CancellationTokenSource CancellationTokenSource { get; set; }
 
         /// <summary>
         /// Gets a token indicating if the script execution was canceled.
@@ -30,9 +30,9 @@ namespace Stride.Engine
         /// <returns></returns>
         public abstract Task Execute();
 
-        protected internal override void PriorityUpdated()
+        protected internal override void OnPriorityUpdated()
         {
-            base.PriorityUpdated();
+            base.OnPriorityUpdated();
 
             // Update micro thread priority
             if (MicroThread != null)

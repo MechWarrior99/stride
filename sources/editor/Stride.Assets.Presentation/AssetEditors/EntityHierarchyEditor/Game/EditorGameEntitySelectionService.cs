@@ -451,7 +451,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
 
             while (game.IsRunning)
             {
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 if (IsActive)
                 {
@@ -514,7 +514,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             game = (EntityHierarchyEditorGame)editorGame;
 
             Editor.SelectedContent.CollectionChanged += SelectedContentChanged;
-            game.Script.AddTask(Execute);
+            game.WorkerSystem.AddTask(Execute);
             return Task.FromResult(true);
         }
 

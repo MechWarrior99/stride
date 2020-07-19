@@ -56,7 +56,7 @@ namespace Stride.Navigation
         private CancellationTokenSource buildTaskCancellationTokenSource;
 
         private SceneSystem sceneSystem;
-        private ScriptSystem scriptSystem;
+        private WorkerSystem workerSystem;
         private StaticColliderProcessor processor;
 
         public DynamicNavigationMeshSystem(IServiceRegistry registry) : base(registry)
@@ -97,7 +97,7 @@ namespace Stride.Navigation
             }
 
             sceneSystem = Services.GetSafeServiceAs<SceneSystem>();
-            scriptSystem = Services.GetSafeServiceAs<ScriptSystem>();
+            workerSystem = Services.GetSafeServiceAs<WorkerSystem>();
         }
 
         /// <summary>
@@ -129,13 +129,13 @@ namespace Stride.Navigation
 
             if (pendingRebuild && currentSceneInstance != null)
             {
-                scriptSystem.AddTask(async () =>
+                workerSystem.AddTask(async () =>
                 {
                     // TODO EntityProcessors
                     // Currently have to wait a frame for transformations to update
                     // for example when calling Rebuild from the event that a component was added to the scene, this component will not be in the correct location yet
                     // since the TransformProcessor runs the next frame
-                    await scriptSystem.NextFrame();
+                    await workerSystem.NextFrame();
                     await Rebuild();
                 });
                 pendingRebuild = false;

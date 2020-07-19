@@ -97,7 +97,7 @@ namespace Stride.Editor.Preview
             SceneSystem.SceneInstance = new SceneInstance(Services, previewScene, ExecutionMode.Preview);
 
             // add thumbnail builder and preview script to scheduler
-            Script.AddTask(ProcessPreviewRequestsTask);
+            WorkerSystem.AddTask(ProcessPreviewRequestsTask);
         }
 
         /// <inheritdoc />
@@ -112,7 +112,7 @@ namespace Stride.Editor.Preview
         {
             while (IsRunning)
             {
-                await Script.NextFrame();
+                await WorkerSystem.NextFrame();
 
                 PreviewRequest request;
                 lock (requestLock)

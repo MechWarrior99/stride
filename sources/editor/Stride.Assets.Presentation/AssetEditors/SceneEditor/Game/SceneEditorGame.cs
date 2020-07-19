@@ -220,7 +220,7 @@ namespace Stride.Assets.Presentation.AssetEditors.SceneEditor.Game
             var anchorScript = new VirtualAnchorScript();
             anchorEntity.Components.Add(anchorScript);
             // Note: because the script processor is disabled in editor game, we have to add the script manually
-            Script.Add(anchorScript);
+            WorkerSystem.Add(anchorScript);
         }
 
         private void RemoveSceneFromParent([NotNull] Scene scene)
@@ -236,7 +236,7 @@ namespace Stride.Assets.Presentation.AssetEditors.SceneEditor.Game
                 var anchorEntity = parent.Entities[anchorIndex].Components.OfType<VirtualAnchorScript>().FirstOrDefault();
                 // Remove anchor script
                 if (anchorEntity != null)
-                    Script.Remove(anchorEntity);
+                    WorkerSystem.Remove(anchorEntity);
                 // Remove virtual anchor
                 parent.Entities.RemoveAt(anchorIndex);
             }
@@ -258,7 +258,7 @@ namespace Stride.Assets.Presentation.AssetEditors.SceneEditor.Game
         /// We use an indirection with a virtual anchor to be able to display a gizmo that the user can manipulate.
         /// In a real game, this indirection is not needed, and the scene offset should be directly modified instead.
         /// </remarks>
-        private class VirtualAnchorScript : AsyncScript
+        private class VirtualAnchorScript : AsyncWorker
         {
             private new SceneEditorGame Game => (SceneEditorGame)base.Game;
 
@@ -277,7 +277,7 @@ namespace Stride.Assets.Presentation.AssetEditors.SceneEditor.Game
                         scene.Offset = newPosition;
                         oldPositon = newPosition;
                     }
-                    await Script.NextFrame();
+                    await WorkerSystem.NextFrame();
                 }
             }
         }

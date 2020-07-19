@@ -91,7 +91,7 @@ namespace Stride.Engine.Tests
 
             camera = new TestCamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor);
             CameraComponent = camera.Camera;
-            Script.Add(camera);
+            WorkerSystem.Add(camera);
 
             // TODO GRAPHICS REFACTOR
             ChangeModel(0);

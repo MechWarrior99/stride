@@ -53,7 +53,7 @@ namespace Stride.UI.Tests.Regression
             var camera = new TestUICamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor) { Yaw = MathUtil.Pi/4, Pitch = MathUtil.Pi/4, Position = new Vector3(500, 500, 500), MoveSpeed = 100 };
             camera.SetTarget(cube, true);
             CameraComponent = camera.Camera;
-            Script.Add(camera);
+            WorkerSystem.Add(camera);
         }
 
         protected override void RegisterTests()

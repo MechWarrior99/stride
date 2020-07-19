@@ -206,7 +206,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             game = editorGame;
 
             // Execute before others: we want this script to take over mouse control before others have a chance to do so
-            game.Script.AddTask(Update, -1);
+            game.WorkerSystem.AddTask(Update, -1);
             return Task.FromResult(true);
         }
 
@@ -241,7 +241,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
         {
             while (!IsDisposed)
             {
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 if (!IsActive)
                     continue;

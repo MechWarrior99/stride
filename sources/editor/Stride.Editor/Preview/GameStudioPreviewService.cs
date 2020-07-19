@@ -172,7 +172,7 @@ namespace Stride.Editor.Preview
                 allAssets.AddRange(e.Assets);
                 if (currentPreview != null && allAssets.Contains(currentPreview.AssetViewModel))
                 {
-                    PreviewGame.Script.AddTask(UpdatePreviewAsset);
+                    PreviewGame.WorkerSystem.AddTask(UpdatePreviewAsset);
                 }
             }
         }
@@ -191,7 +191,7 @@ namespace Stride.Editor.Preview
             {
                 previewBuildQueue = asset;
             }
-            PreviewGame.Script.AddTask(ChangePreviewAsset);
+            PreviewGame.WorkerSystem.AddTask(ChangePreviewAsset);
         }
 
         public AssetCompilerResult Compile(AssetItem asset)

@@ -6,7 +6,7 @@ using System;
 namespace Stride.Engine
 {
     /// <summary>
-    /// Allows to declare that a component requires another component in order to run (used for <see cref="ScriptComponent"/>
+    /// Allows to declare that a component requires another component in order to run (used for <see cref="WorkerComponent"/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class RequireComponentAttribute : EntityComponentAttributeBase

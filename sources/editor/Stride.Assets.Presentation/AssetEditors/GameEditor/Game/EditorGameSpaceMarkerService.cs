@@ -17,7 +17,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
             game = (EntityHierarchyEditorGame)editorGame;
             spaceMarker = new SpaceMarker(game);
             spaceMarker.Initialize(game.Services, game.EditorScene);
-            game.Script.AddTask(Update);
+            game.WorkerSystem.AddTask(Update);
             return Task.FromResult(true);
         }
 
@@ -27,7 +27,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
             while (!IsDisposed)
             {
                 spaceMarker.Update();
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
             }
         }
     }

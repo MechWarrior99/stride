@@ -170,7 +170,7 @@ namespace Stride.Engine.NextGen
 
             camera = new TestCamera(Services.GetSafeServiceAs<SceneSystem>().GraphicsCompositor);
             CameraComponent = camera.Camera;
-            Script.Add(camera);
+            WorkerSystem.Add(camera);
         }
 
         static void Main(string[] args)

@@ -50,7 +50,7 @@ namespace Stride.Navigation.Tests
             if (dynamicNavigation != null)
                 dynamicNavigation.Enabled = false;
 
-            Script.AddTask(RunAsyncTests);
+            WorkerSystem.AddTask(RunAsyncTests);
         }
 
         protected override void Update(GameTime gameTime)
@@ -66,11 +66,11 @@ namespace Stride.Navigation.Tests
         {
             // Wait for start method to be called
             while (controllerA.Character == null)
-                await Script.NextFrame();
+                await WorkerSystem.NextFrame();
 
             // Wait for controllers to be on the ground
             while (!controllerA.Character.IsGrounded || !controllerB.Character.IsGrounded)
-                await Script.NextFrame();
+                await WorkerSystem.NextFrame();
 
             controllerA.UpdateSpawnPosition();
             controllerB.UpdateSpawnPosition();

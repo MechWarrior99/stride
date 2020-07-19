@@ -52,7 +52,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
 
             grid = new TGridGizmo();
             grid.Initialize(editorGame.Services, game.EditorScene);
-            game.Script.AddTask(UpdateGrid);
+            game.WorkerSystem.AddTask(UpdateGrid);
             return Task.FromResult(true);
         }
 
@@ -62,7 +62,7 @@ namespace Stride.Assets.Presentation.AssetEditors.GameEditor.Game
             {
                 grid.IsEnabled = IsActive;
                 grid.Update(Color, game.EditorServices.Get<IEditorGameCameraService>().SceneUnit);
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
             }
         }
     }

@@ -365,7 +365,7 @@ namespace Stride.Assets.Presentation.AssetEditors.UIEditor.Game
         protected override Task<bool> Initialize(EditorServiceGame editorGame)
         {
             Game = editorGame;
-            Game.Script.AddTask(Update);
+            Game.WorkerSystem.AddTask(Update);
             return Task.FromResult(true);
         }
 
@@ -518,7 +518,7 @@ namespace Stride.Assets.Presentation.AssetEditors.UIEditor.Game
             {
                 if (IsDisposed)
                     return;
-                await Game.Script.NextFrame();
+                await Game.WorkerSystem.NextFrame();
 
                 adornerCanvas = GetAdornerCanvas();
                 if (adornerCanvas == null)

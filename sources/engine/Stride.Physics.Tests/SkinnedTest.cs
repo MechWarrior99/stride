@@ -47,12 +47,12 @@ namespace Stride.Physics.Tests
         public void SkinnedTest1()
         {
             var game = new SkinnedTest();
-            game.Script.AddTask(async () =>
+            game.WorkerSystem.AddTask(async () =>
             {
                 game.ScreenShotAutomationEnabled = false;
 
-                await game.Script.NextFrame();
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 var character = game.SceneSystem.SceneInstance.RootScene.Entities.First(ent => ent.Name == "Model");
                 var dynamicBody = character.GetAll<RigidbodyComponent>().First(x => !x.IsKinematic);
@@ -66,7 +66,7 @@ namespace Stride.Physics.Tests
                 var twoSeconds = 120;
                 while (twoSeconds-- > 0)
                 {
-                    await game.Script.NextFrame();
+                    await game.WorkerSystem.NextFrame();
                 }
 
                 Assert.Equal(dynamicBody.BoneWorldMatrix, model.Skeleton.NodeTransformations[dynamicBody.BoneIndex].WorldMatrix);
@@ -78,7 +78,7 @@ namespace Stride.Physics.Tests
 
                 Assert.Equal(kinematicBody.BoneWorldMatrix, pastTransform);
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 Assert.NotEqual(kinematicBody.BoneWorldMatrix, pastTransform);
 

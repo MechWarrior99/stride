@@ -165,7 +165,7 @@ namespace Stride.Debugger.Target
                         using (game)
                         {
                             // Allow scripts to crash, we will still restart them
-                            game.Script.Scheduler.PropagateExceptions = false;
+                            game.WorkerSystem.Scheduler.PropagateExceptions = false;
                             game.Run();
                         }
                     }
@@ -226,7 +226,7 @@ namespace Stride.Debugger.Target
                 Log.MessageLogged += Log_MessageLogged;
 
                 // Log suppressed exceptions in scripts
-                ScriptSystem.Log.MessageLogged += Log_MessageLogged;
+                WorkerSystem.Log.MessageLogged += Log_MessageLogged;
                 Scheduler.Log.MessageLogged += Log_MessageLogged;
 
                 Log.Info("Starting debugging session");

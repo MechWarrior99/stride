@@ -172,7 +172,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             color.A = 0x9F;
             wireframeMaterial = CreateDebugMaterial(color);
 
-            game.Script.AddTask(Update);
+            game.WorkerSystem.AddTask(Update);
 
             return Task.FromResult(true);
         }
@@ -203,7 +203,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             // Check every frame if light probes need rebuild
             while (!IsDisposed)
             {
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
 
                 if (!IsActive)
                     continue;

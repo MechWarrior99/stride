@@ -193,12 +193,12 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
             editor.Session.AssetPropertiesChanged += OnAssetPropertiesChanged;
             editor.Session.DeletedAssetsChanged += OnDeletedAssetsChanged;
 
-            editorGame.Script.AddTask(async () =>
+            editorGame.WorkerSystem.AddTask(async () =>
             {
                 while (editorGame.IsRunning)
                 {
                     Update();
-                    await editorGame.Script.NextFrame();
+                    await editorGame.WorkerSystem.NextFrame();
                 }
             });
 
@@ -456,7 +456,7 @@ namespace Stride.Assets.Presentation.AssetEditors.EntityHierarchyEditor.Game
                 if (shouldRebuild && (dynamicNavigationMeshSystem?.Enabled ?? false))
                 {
                     // Trigger rebuild of dynamic navigation
-                    game.Script.AddTask(async () => await dynamicNavigationMeshSystem.Rebuild());
+                    game.WorkerSystem.AddTask(async () => await dynamicNavigationMeshSystem.Rebuild());
                 }
             });
         }

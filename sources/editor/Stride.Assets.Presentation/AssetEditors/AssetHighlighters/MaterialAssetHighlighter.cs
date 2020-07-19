@@ -114,7 +114,7 @@ namespace Stride.Assets.Presentation.AssetEditors.AssetHighlighters
                 var currentColor = new Color4(color.R, color.G, color.B, color.A * ratio);
                 HighlightRenderFeature.MaterialHighlightColors[material] = Color4.PremultiplyAlpha(currentColor);
 
-                await game.Script.NextFrame();
+                await game.WorkerSystem.NextFrame();
                 currentTime += (float)game.UpdateTime.Elapsed.TotalSeconds;
             }
         }

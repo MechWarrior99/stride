@@ -141,7 +141,7 @@ namespace Stride.Assets.Presentation.Preview
                 entityScene.Entities.Add(PreviewEntity.Entity);
 
                 // Start script manually since ScriptProcessor is not enabled (in case some entity has script we don't want to run)
-                Game.Script.Add(CameraScript);
+                Game.WorkerSystem.Add(CameraScript);
             }
         }
 
@@ -153,7 +153,7 @@ namespace Stride.Assets.Presentation.Preview
                 return;
 
             // Start script manually since ScriptProcessor is not enabled (in case some entity has script we don't want to run)
-            Game.Script.Remove(CameraScript);
+            Game.WorkerSystem.Remove(CameraScript);
 
             // remove the entity from the scene.
             entityScene.Entities.Remove(PreviewEntity.Entity);
@@ -168,7 +168,7 @@ namespace Stride.Assets.Presentation.Preview
             CameraScript.AdjustViewTarget(PreviewEntity?.Entity);
         }
 
-        protected class CameraUpdateScript : SyncScript
+        protected class CameraUpdateScript : WorkerComponent, IStart, IUpdate
         {
             // ReSharper disable once StaticFieldInGenericType
             private static readonly BoundingSphere InvalidBoundingSphere = new BoundingSphere(Vector3.Zero, MathUtil.ZeroTolerance);
@@ -184,7 +184,7 @@ namespace Stride.Assets.Presentation.Preview
             private CameraComponent cameraComponent;
             private BoundingSphere previousBoundingSphere = InvalidBoundingSphere;
             
-            public override void Start()
+            public void Start()
             {
                 cameraComponent = Entity.Get<CameraComponent>();
             }
@@ -236,7 +236,7 @@ namespace Stride.Assets.Presentation.Preview
                 UpdateComponents();
             }
 
-            public override void Update()
+            public void Update()
             {
                 // if the user is pressing or releasing a new mouse button the action change and we reset the mouse origin position
                 if (Input.HasReleasedMouseButtons || Input.HasPressedMouseButtons)
